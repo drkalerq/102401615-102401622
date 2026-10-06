@@ -64,8 +64,15 @@
     document.getElementById('feedback').hidden = true;
     if (page === 'home') renderHome();
     if (page === 'search') searchPage.render();
+    if (page === 'mine') minePage.render();
     document.getElementById('main-content').focus({ preventScroll: true });
   }
+  function saveItems(nextItems) {
+    const result = store.save(nextItems);
+    if (result.ok) items = nextItems;
+    return result;
+  }
+  const minePage = window.LostFoundMyPosts.create({ core, getItems: () => items, createCard, element, saveItems, writable: loaded.writable });
   const searchPage = window.LostFoundSearch.create({ core, getItems: () => items, createCard, element });
   const detailPage = window.LostFoundDetail.create({ core, getItems: () => items, icons, element });
   document.getElementById('detail-back').addEventListener('click', function () { navigate(detailFrom); });
@@ -120,9 +127,8 @@
       } while (items.some(item => item.id === id));
       const post = core.createPost(checked.data, id, new Date());
       const nextItems = [post].concat(items);
-      const result = store.save(nextItems);
+      const result = saveItems(nextItems);
       if (!result.ok) throw new Error(result.error);
-      items = nextItems;
       form.reset();
       homeFilter = 'all';
       document.querySelectorAll('[data-filter]').forEach(function (button) {

@@ -90,3 +90,13 @@ a.item-card:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px;
 .detail-description, .contact-text { font-size: 13px; line-height: 1.9; overflow-wrap: anywhere; white-space: pre-wrap; }
 .detail-description { margin-bottom: 24px; }
 .contact-box { padding: 0 14px 12px; border: 1px solid var(--line); background: #f8fafc; border-radius: 10px; margin-top: 12px; }
+.mine-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin: 20px 0; }
+.mine-stat { display: flex; flex-direction: column; gap: 8px; align-items: center; padding: 17px 8px; border-radius: 12px; border: 1px solid var(--line); background: white; }
+.mine-stat strong { font-size: 23px; color: var(--blue); }
+.mine-stat span { color: var(--muted); font-size: 11px; }
+.mine-entry { background: white; border: 1px solid var(--line); border-radius: 15px; overflow: hidden; margin-bottom: 14px; }
+.mine-entry .item-card { margin: 0; border: 0; border-radius: 0; }
+.mine-actions { display: flex; justify-content: flex-end; gap: 8px; padding: 10px 16px; border-top: 1px solid var(--line); }
+.secondary-button { background: #edf3ff; color: var(--blue); border: 1px solid #ccdbf7; border-radius: 8px; font-size: 12px; padding: 9px 12px; }
+.contact-value { display: block; width: 100%; border: 1px solid #ced7e4; padding: 10px; color: var(--ink); border-radius: 8px; font: inherit; font-size: 13px; resize: vertical; margin: 10px 0; }
+.contact-value:focus { outline: 2px solid var(--blue); }

@@ -34,7 +34,34 @@
       const contactBox = el('div', 'contact-box');
       contactBox.id = 'detail-contact';
       contactBox.hidden = true;
-      contactBox.append(el('h4', 'detail-subtitle', '联系方式'), el('p', 'contact-text', item.contact),
+      const contactLabel = el('label', 'detail-subtitle', '联系方式');
+      contactLabel.htmlFor = 'contact-value';
+      const contactValue = el('textarea', 'contact-value');
+      contactValue.id = 'contact-value';
+      contactValue.readOnly = true;
+      contactValue.rows = 2;
+      contactValue.value = item.contact;
+      const copyButton = el('button', 'secondary-button', '复制联系方式');
+      copyButton.type = 'button';
+      const copyFeedback = el('p', 'field-hint');
+      copyFeedback.setAttribute('role', 'status');
+      copyButton.addEventListener('click', async function () {
+        copyButton.disabled = true;
+        try {
+          let clipboard;
+          try { clipboard = navigator.clipboard; } catch (_) { clipboard = null; }
+          const result = await window.LostFoundClipboard.copyText(item.contact, clipboard);
+          if (result.ok) copyFeedback.textContent = '已复制联系方式，可前往联系发布者。';
+          else {
+            copyFeedback.textContent = '自动复制失败，请在下方联系方式中按 Ctrl+C 手动复制。';
+            if (contactValue.isConnected && !contactBox.hidden) {
+              contactValue.focus();
+              contactValue.select();
+            }
+          }
+        } finally { copyButton.disabled = false; }
+      });
+      contactBox.append(contactLabel, contactValue, copyButton, copyFeedback,
         el('p', 'field-hint', '请通过上述方式自行联系发布者。初始示例联系方式仅用于演示。'));
       contactButton.addEventListener('click', function () {
         const show = contactBox.hidden;

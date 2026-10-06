@@ -69,7 +69,24 @@
   function findItem(items, id) {
     return items.find(item => item.id === id) || null;
   }
-  const api = { categories, filterItems, statusLabel, normalizeInput, validatePost, createPost, searchItems, findItem };
+  function myItems(items, status) {
+    return filterItems(items, 'all').filter(item => item.isMine && (!status || status === 'all' || item.status === status));
+  }
+  function mySummary(items) {
+    const mine = myItems(items, 'all');
+    return { total: mine.length,
+      lostActive: mine.filter(item => item.type === 'lost' && item.status === 'active').length,
+      foundActive: mine.filter(item => item.type === 'found' && item.status === 'active').length,
+      completed: mine.filter(item => item.status === 'completed').length };
+  }
+  function changeStatus(items, id, status) {
+    const item = findItem(items, id);
+    if (!item) throw new Error('这条信息已不存在。');
+    if (!item.isMine) throw new Error('只能修改自己的发布。');
+    if (!['active', 'completed'].includes(status)) throw new Error('状态无效。');
+    return items.map(current => current.id === id ? Object.assign({}, current, {status}) : current);
+  }
+  const api = { categories, filterItems, statusLabel, normalizeInput, validatePost, createPost, searchItems, findItem, myItems, mySummary, changeStatus };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.LostFoundCore = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this);
