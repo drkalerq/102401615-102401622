@@ -14,6 +14,7 @@
       const panel = el('article', 'detail-panel');
       const image = el('div', 'detail-image', context.icons[item.category] || '📦');
       image.setAttribute('aria-hidden', 'true');
+      window.LostFoundImages.renderPhoto(image,item.image,item.title + '照片');
       const badges = el('div', 'badges');
       badges.append(el('span', 'badge ' + item.type, item.type === 'lost' ? '寻物' : '招领'),
         el('span', 'badge ' + (item.status === 'completed' ? 'done' : 'status'), context.core.statusLabel(item)));

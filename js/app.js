@@ -43,6 +43,7 @@
       element('p', 'item-owner', (item.type === 'lost' ? '失主：' : '拾得者：') + item.owner));
     const thumb = element('div', 'item-thumb ' + item.type, icons[item.category] || '📦');
     thumb.setAttribute('aria-hidden', 'true');
+    window.LostFoundImages.renderPhoto(thumb,item.image,item.title + '照片');
     card.append(info, thumb);
     return card;
   }
@@ -108,8 +109,25 @@
       else field.removeAttribute('aria-describedby');
     });
   }
-  function formValues() { return Object.fromEntries(new FormData(form)); }
+  const imageSelection = window.LostFoundImages.createSelection(window.LostFoundImages.compressFile, function (state) {
+    const preview = document.getElementById('image-preview');
+    preview.replaceChildren();
+    preview.hidden = !state.image;
+    if (state.image) window.LostFoundImages.renderPhoto(preview,state.image,'待保存的物品照片');
+    document.getElementById('image-remove').hidden = !state.image && !state.busy;
+    document.getElementById('image-feedback').textContent = state.busy ? '正在处理照片，请稍候…' : (state.error ? state.error + ' 原照片保持不变。' : (state.image ? '照片已准备好，点击发布或保存修改后生效。' : ''));
+    document.getElementById('publish-submit').disabled = !loaded.writable || state.busy;
+  });
+  document.getElementById('f-image').addEventListener('change',function (event) {
+    const file = event.target.files[0];
+    if (file) imageSelection.select(file);
+    event.target.value = '';
+  });
+  document.getElementById('image-remove').addEventListener('click',function () { imageSelection.set(''); });
+  function formValues() { return Object.assign(Object.fromEntries(new FormData(form)),{image: imageSelection.getState().image}); }
   function fillForm(values) {
+    imageSelection.set(values.image || '');
+    document.getElementById('f-image').value = '';
     ['type', 'title', 'category', 'place', 'eventTime', 'description', 'contact'].forEach(function (key) {
       form.elements.namedItem(key).value = values[key] || '';
     });
@@ -145,6 +163,7 @@
   });
   form.addEventListener('submit', function (event) {
     event.preventDefault();
+    if (imageSelection.getState().busy) return;
     const input = formValues();
     const checked = core.validatePost(input);
     showErrors(checked.errors);
@@ -162,7 +181,7 @@
     try {
       const wasEditing = Boolean(editingId);
       if (wasEditing) {
-        const result = saveItems(core.editPost(items, editingId, checked.data));
+        const result = saveItems(window.LostFoundImages.applyImage(core.editPost(items, editingId, checked.data),editingId,input.image));
         if (!result.ok) throw new Error(result.error);
         finishEditing();
         navigate('mine');
@@ -179,10 +198,11 @@
           : 'post-' + Date.now() + '-' + Math.random().toString(36).slice(2);
       } while (items.some(item => item.id === id));
       const post = core.createPost(checked.data, id, new Date());
-      const nextItems = [post].concat(items);
+      const nextItems = window.LostFoundImages.applyImage([post].concat(items),post.id,input.image);
       const result = saveItems(nextItems);
       if (!result.ok) throw new Error(result.error);
       form.reset();
+      imageSelection.set('');
       homeFilter = 'all';
       document.querySelectorAll('[data-filter]').forEach(function (button) {
         const active = button.dataset.filter === 'all';
@@ -197,7 +217,7 @@
       failure.textContent = error.message || '发布失败，请稍后重试。';
       failure.hidden = false;
     } finally {
-      submit.disabled = !loaded.writable;
+      submit.disabled = !loaded.writable || imageSelection.getState().busy;
     }
   });
   renderHome();

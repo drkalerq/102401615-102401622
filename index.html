@@ -9,6 +9,7 @@
   <script defer src="js/data.js"></script>
   <script defer src="js/storage.js"></script>
   <script defer src="js/clipboard.js"></script>
+  <script defer src="js/images.js"></script>
   <script defer src="js/pages/my-posts.js"></script>
   <script defer src="js/pages/search.js"></script>
   <script defer src="js/pages/detail.js"></script>
@@ -63,6 +64,7 @@
           <div class="field"><label for="f-eventTime">丢失／捡到时间</label><input id="f-eventTime" name="eventTime" type="datetime-local"><p id="event-time-hint" class="field-hint">不填则使用发布时刻。</p><p id="error-eventTime" class="field-error" hidden></p></div>
           <div class="field"><label for="f-description">详细描述</label><textarea id="f-description" name="description" rows="4" maxlength="500" placeholder="物品的颜色、外观和特征（最多 500 字）"></textarea><p id="error-description" class="field-error" hidden></p></div>
           <div class="field"><label for="f-contact">联系方式 *</label><input id="f-contact" name="contact" maxlength="100" placeholder="微信号或手机号" required><p class="field-hint">联系方式将展示在详情中，请勿填写密码等敏感内容。</p><p id="error-contact" class="field-error" hidden></p></div>
+          <div class="field"><label for="f-image">物品照片（选填）</label><input id="f-image" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="image-hint"><p id="image-hint" class="field-hint">支持 JPG、PNG、WebP，最大 5 MB。保存前自动缩小和压缩，透明背景转为白色。</p><div id="image-preview" class="upload-preview" hidden></div><button id="image-remove" type="button" class="secondary-button" hidden>移除照片</button><p id="image-feedback" class="field-hint" role="status"></p></div>
           <p id="publish-error" class="notice error-notice" role="alert" hidden></p>
           <button id="edit-cancel" class="secondary-button" type="button" hidden>取消编辑</button>
           <button id="publish-submit" class="primary-button submit-button" type="submit">发布信息</button>
