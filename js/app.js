@@ -1,8 +1,18 @@
 (function () {
   'use strict';
   const core = window.LostFoundCore;
-  const items = window.LostFoundDemo;
-  const icons = { '证件': '🪪', '电子用品': '🎧', '生活用品': '☂️' };
+  let browserStorage;
+  try { browserStorage = window.localStorage; } catch (_) { browserStorage = null; }
+  const store = window.LostFoundStorage.createStore(browserStorage);
+  const loaded = store.load(window.LostFoundDemo);
+  let items = loaded.items;
+  if (loaded.warning) {
+    const warning = document.getElementById('storage-warning');
+    warning.textContent = loaded.warning;
+    warning.hidden = false;
+    document.getElementById('publish-submit').disabled = true;
+  }
+  const icons = { '证件': '🪪', '电子用品': '🎧', '生活用品': '☂️', '书籍文具': '📚', '其他': '📦' };
   let homeFilter = 'all';
 
   function element(tag, className, text) {
@@ -42,6 +52,7 @@
       if (active) button.setAttribute('aria-current', 'page');
       else button.removeAttribute('aria-current');
     });
+    document.getElementById('feedback').hidden = true;
     if (page === 'home') renderHome();
     document.getElementById('main-content').focus({ preventScroll: true });
   }
@@ -58,6 +69,64 @@
       });
       renderHome();
     });
+  });
+  const form = document.getElementById('publish-form');
+  function showErrors(errors) {
+    ['title', 'place', 'eventTime', 'description', 'contact'].forEach(function (key) {
+      const field = document.getElementById('f-' + key);
+      const message = document.getElementById('error-' + key);
+      message.textContent = errors[key] || '';
+      message.hidden = !errors[key];
+      field.setAttribute('aria-invalid', String(Boolean(errors[key])));
+      if (errors[key]) field.setAttribute('aria-describedby', message.id);
+      else field.removeAttribute('aria-describedby');
+    });
+  }
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    const input = Object.fromEntries(new FormData(form));
+    const checked = core.validatePost(input);
+    showErrors(checked.errors);
+    const failure = document.getElementById('publish-error');
+    failure.hidden = true;
+    if (!checked.valid) {
+      failure.textContent = '发布未完成：' + Object.values(checked.errors)[0];
+      failure.hidden = false;
+      const first = form.querySelector('[aria-invalid="true"]');
+      if (first) first.focus();
+      return;
+    }
+    const submit = document.getElementById('publish-submit');
+    submit.disabled = true;
+    try {
+      let id;
+      do {
+        id = window.crypto && typeof window.crypto.randomUUID === 'function'
+          ? window.crypto.randomUUID()
+          : 'post-' + Date.now() + '-' + Math.random().toString(36).slice(2);
+      } while (items.some(item => item.id === id));
+      const post = core.createPost(checked.data, id, new Date());
+      const nextItems = [post].concat(items);
+      const result = store.save(nextItems);
+      if (!result.ok) throw new Error(result.error);
+      items = nextItems;
+      form.reset();
+      homeFilter = 'all';
+      document.querySelectorAll('[data-filter]').forEach(function (button) {
+        const active = button.dataset.filter === 'all';
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+      navigate('home');
+      const feedback = document.getElementById('feedback');
+      feedback.textContent = '发布成功！信息已保存在当前浏览器，并展示在首页。';
+      feedback.hidden = false;
+    } catch (error) {
+      failure.textContent = error.message || '发布失败，请稍后重试。';
+      failure.hidden = false;
+    } finally {
+      submit.disabled = !loaded.writable;
+    }
   });
   renderHome();
 })();

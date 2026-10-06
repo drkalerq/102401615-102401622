@@ -45,3 +45,23 @@ h2 { font-size: 18px; margin: 0; }
 .placeholder p { color: var(--muted); font-size: 13px; line-height: 1.8; }
 .primary-button { background: var(--blue); color: white; border: 0; padding: 11px 22px; border-radius: 10px; margin-top: 18px; }
 @media (max-width: 560px) { body { padding: 0; } .app-shell { border: 0; border-radius: 0; box-shadow: none; max-width: none; min-height: 100dvh; display: flex; flex-direction: column; } main { flex: 1; } h1 { font-size: 27px; } }
+
+.form-intro { color: var(--muted); font-size: 12px; line-height: 1.8; margin: 12px 0 18px; }
+.publish-form { background: white; border: 1px solid var(--line); border-radius: 15px; padding: 18px; }
+.type-field { border: 0; padding: 0; margin: 0 0 20px; }
+.type-field legend, .field > label { font-size: 13px; font-weight: 600; margin-bottom: 9px; display: block; }
+.type-field label { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; margin-right: 18px; padding: 5px 0; }
+.type-field input { accent-color: var(--blue); }
+.field { margin-bottom: 20px; }
+.field input, .field select, .field textarea { display: block; width: 100%; min-width: 0; max-width: 100%; border: 1px solid #ced7e4; border-radius: 9px; background: #f8fafc; color: var(--ink); padding: 11px; font: inherit; font-size: 13px; }
+.field textarea { resize: vertical; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid var(--blue); outline-offset: 1px; }
+.field [aria-invalid="true"] { border-color: #b52635; }
+.field-error, .field-hint { font-size: 11px; line-height: 1.8; margin: 6px 0 0; }
+.field-error { color: #b52635; }
+.field-hint { color: var(--muted); }
+.notice { padding: 12px; border-radius: 9px; line-height: 1.7; font-size: 12px; overflow-wrap: anywhere; }
+.error-notice { background: #fff0f0; color: #a52131; border: 1px solid #f6cdd3; }
+.success-notice { background: #e5f5ee; color: #18744b; border: 1px solid #b8e2ce; }
+.submit-button { width: 100%; margin-top: 0; }
+button:disabled { cursor: not-allowed; opacity: .55; }
