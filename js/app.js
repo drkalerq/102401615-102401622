@@ -81,7 +81,7 @@
   }
   const minePage = window.LostFoundMyPosts.create({ core, getItems: () => items, createCard, element, saveItems, writable: loaded.writable, startEditing });
   const searchPage = window.LostFoundSearch.create({ core, getItems: () => items, createCard, element });
-  const detailPage = window.LostFoundDetail.create({ core, getItems: () => items, icons, element });
+  const detailPage = window.LostFoundDetail.create({ core, getItems: () => items, icons, element, createCard, getDetailFrom: () => detailFrom });
   document.getElementById('detail-back').addEventListener('click', function () { navigate(detailFrom); });
   document.querySelectorAll('[data-page]').forEach(function (button) {
     button.addEventListener('click', function () { navigate(button.dataset.page); });

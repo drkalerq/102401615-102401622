@@ -113,3 +113,7 @@ a.item-card:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px;
 .detail-image img { width: 100%; max-height: 380px; object-fit: contain; display: block; background: #f4f7fb; }
 .upload-preview { margin: 12px 0; border-radius: 14px; overflow: hidden; background: #f4f7fb; }
 .upload-preview img { width: 100%; max-height: 240px; object-fit: contain; display: block; }
+
+.clue-panel { margin-top: 24px; padding-top: 20px; border-top: 1px solid #dce5f0; }
+.clue-entry { margin-top: 14px; }
+.clue-reasons { margin: 8px 4px 0; font-size: 12px; color: #496584; line-height: 1.7; }

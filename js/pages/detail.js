@@ -72,6 +72,23 @@
       });
       panel.append(contactButton, contactBox);
       box.append(panel);
+      const clues = el('section','clue-panel');
+      const heading = el('h3','results-heading','相似线索');
+      clues.append(heading);
+      if (item.status === 'completed') {
+        clues.append(el('p','field-hint','这条信息已完成，暂不推荐线索。'));
+      } else {
+        clues.append(el('p','field-hint','为你查找相反类型的未完成信息。以下为文字和时间匹配线索，请核对物品特征后联系发布者。'));
+        const results = window.LostFoundRecommendations.recommend(context.getItems(),item.id);
+        if (!results.length) clues.append(el('p','empty-state','暂无线索，可以稍后再查看或调整搜索条件。'));
+        results.forEach(function (result) {
+          const entry = el('div','clue-entry');
+          const reasons = el('p','clue-reasons','推荐理由：' + result.reasons.join(' · '));
+          entry.append(context.createCard(result.item,context.getDetailFrom()),reasons);
+          clues.append(entry);
+        });
+      }
+      box.append(clues);
     }
     return { render };
   }
