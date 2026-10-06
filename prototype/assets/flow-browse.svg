@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 360" width="680" height="360" font-family="PingFang SC, Microsoft YaHei, sans-serif">
+  <rect x="0" y="0" width="680" height="360" fill="#ffffff"/>
+  <text x="24" y="34" fill="#1F2937" font-size="18" font-weight="700">流程一：浏览 / 搜索 → 查看详情</text>
+  <!-- boxes -->
+  <rect x="40" y="90" width="130" height="56" rx="12" fill="#2D6CDF"/>
+  <text x="105" y="124" fill="#fff" font-size="14" font-weight="600" text-anchor="middle">进入首页</text>
+
+  <rect x="230" y="90" width="150" height="56" rx="12" fill="#fff" stroke="#2D6CDF" stroke-width="2"/>
+  <text x="305" y="116" fill="#1F2937" font-size="13" text-anchor="middle">浏览信息流</text>
+  <text x="305" y="134" fill="#6B7280" font-size="11" text-anchor="middle">或 使用搜索</text>
+
+  <rect x="440" y="90" width="150" height="56" rx="12" fill="#fff" stroke="#2D6CDF" stroke-width="2"/>
+  <text x="515" y="116" fill="#1F2937" font-size="13" text-anchor="middle">查看物品详情</text>
+  <text x="515" y="134" fill="#6B7280" font-size="11" text-anchor="middle">类型/地点/描述</text>
+
+  <rect x="440" y="220" width="150" height="56" rx="12" fill="#1A9E5F"/>
+  <text x="515" y="254" fill="#fff" font-size="14" font-weight="600" text-anchor="middle">联系发布者</text>
+
+  <!-- arrows -->
+  <line x1="170" y1="118" x2="228" y2="118" stroke="#9AA5B1" stroke-width="2"/>
+  <polygon points="228,118 220,113 220,123" fill="#9AA5B1"/>
+  <line x1="380" y1="118" x2="438" y2="118" stroke="#9AA5B1" stroke-width="2"/>
+  <polygon points="438,118 430,113 430,123" fill="#9AA5B1"/>
+  <line x1="515" y1="146" x2="515" y2="218" stroke="#9AA5B1" stroke-width="2"/>
+  <polygon points="515,218 510,210 520,210" fill="#9AA5B1"/>
+  <line x1="440" y1="248" x2="382" y2="248" stroke="#CBD2DC" stroke-width="2" stroke-dasharray="5,4"/>
+  <polygon points="382,248 390,243 390,253" fill="#CBD2DC"/>
+  <text x="350" y="266" fill="#9AA5B1" font-size="11" text-anchor="middle">（可选）</text>
+  <!-- note -->
+  <text x="40" y="320" fill="#6B7280" font-size="13">说明：用户在首页浏览或搜索后进入详情页，可查看完整信息并联系发布者；</text>
+  <text x="40" y="342" fill="#6B7280" font-size="13">如确认是自己的物品，可在详情页修改状态为“已找回/已归还”。</text>
+</svg>

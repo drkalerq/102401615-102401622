@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 844" width="390" height="844" font-family="PingFang SC, Microsoft YaHei, sans-serif">
+  <rect x="0" y="0" width="390" height="844" rx="40" fill="#F2F4F7" stroke="#CBD2DC" stroke-width="3"/>
+  <rect x="147" y="14" width="96" height="22" rx="11" fill="#1F2937"/>
+  <!-- header -->
+  <rect x="0" y="36" width="390" height="56" fill="#fff" stroke="#E2E8F0"/>
+  <text x="22" y="71" fill="#1F2937" font-size="18" font-weight="700">发布信息</text>
+  <text x="368" y="71" fill="#2D6CDF" font-size="14" text-anchor="end">取消</text>
+  <!-- type toggle -->
+  <rect x="16" y="104" width="358" height="44" rx="10" fill="#EEF2F8"/>
+  <rect x="22" y="110" width="173" height="32" rx="8" fill="#2D6CDF"/>
+  <text x="108" y="131" fill="#fff" font-size="14" font-weight="600" text-anchor="middle">我丢了东西（寻物）</text>
+  <text x="282" y="131" fill="#4B5563" font-size="14" font-weight="600" text-anchor="middle">我捡到东西（招领）</text>
+  <!-- form -->
+  <rect x="16" y="164" width="358" height="560" rx="12" fill="#fff" stroke="#E2E8F0"/>
+  <text x="30" y="194" fill="#1F2937" font-size="14" font-weight="600">物品名称 *</text>
+  <rect x="30" y="204" width="330" height="38" rx="8" fill="#F4F6F9" stroke="#E2E8F0"/>
+  <text x="42" y="228" fill="#9AA5B1" font-size="13">如：校园卡 / 雨伞 / 耳机</text>
+
+  <text x="30" y="272" fill="#1F2937" font-size="14" font-weight="600">物品类别</text>
+  <rect x="30" y="282" width="100" height="30" rx="8" fill="#EEF2F8"/>
+  <text x="80" y="302" fill="#4B5563" font-size="12" text-anchor="middle">证件</text>
+  <rect x="140" y="282" width="100" height="30" rx="8" fill="#EEF2F8"/>
+  <text x="190" y="302" fill="#4B5563" font-size="12" text-anchor="middle">电子用品</text>
+
+  <text x="30" y="346" fill="#1F2937" font-size="14" font-weight="600">丢失/捡到地点 *</text>
+  <rect x="30" y="356" width="330" height="38" rx="8" fill="#F4F6F9" stroke="#E2E8F0"/>
+  <text x="42" y="380" fill="#9AA5B1" font-size="13">如：图书馆三楼</text>
+
+  <text x="30" y="424" fill="#1F2937" font-size="14" font-weight="600">时间</text>
+  <rect x="30" y="434" width="330" height="38" rx="8" fill="#F4F6F9" stroke="#E2E8F0"/>
+  <text x="42" y="458" fill="#9AA5B1" font-size="13">2026-09-22 14:30</text>
+
+  <text x="30" y="502" fill="#1F2937" font-size="14" font-weight="600">详细描述</text>
+  <rect x="30" y="512" width="330" height="70" rx="8" fill="#F4F6F9" stroke="#E2E8F0"/>
+  <text x="42" y="536" fill="#9AA5B1" font-size="13">卡套为蓝色，姓名张明…</text>
+
+  <text x="30" y="606" fill="#1F2937" font-size="14" font-weight="600">联系方式 *</text>
+  <rect x="30" y="616" width="330" height="38" rx="8" fill="#F4F6F9" stroke="#E2E8F0"/>
+  <text x="42" y="640" fill="#9AA5B1" font-size="13">微信号 / 手机号</text>
+
+  <rect x="30" y="676" width="100" height="34" rx="8" fill="#EEF2F8"/>
+  <text x="80" y="698" fill="#4B5563" font-size="12" text-anchor="middle">+ 上传图片</text>
+  <!-- publish button -->
+  <rect x="16" y="736" width="358" height="46" rx="23" fill="#2D6CDF"/>
+  <text x="195" y="765" fill="#fff" font-size="16" font-weight="600" text-anchor="middle">发布</text>
+  <!-- bottom nav -->
+  <rect x="0" y="790" width="390" height="54" fill="#fff" stroke="#E2E8F0"/>
+  <text x="55" y="818" fill="#9AA5B1" font-size="12" text-anchor="middle">首页</text>
+  <text x="150" y="818" fill="#9AA5B1" font-size="12" text-anchor="middle">搜索</text>
+  <rect x="175" y="800" width="40" height="40" rx="20" fill="#2D6CDF"/>
+  <text x="195" y="826" fill="#fff" font-size="22" text-anchor="middle">+</text>
+  <text x="300" y="818" fill="#9AA5B1" font-size="12" text-anchor="middle">我的</text>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 844" width="390" height="844" font-family="PingFang SC, Microsoft YaHei, sans-serif">
+  <rect x="0" y="0" width="390" height="844" rx="40" fill="#F2F4F7" stroke="#CBD2DC" stroke-width="3"/>
+  <rect x="147" y="14" width="96" height="22" rx="11" fill="#1F2937"/>
+  <!-- header -->
+  <rect x="0" y="36" width="390" height="56" fill="#fff" stroke="#E2E8F0"/>
+  <text x="22" y="71" fill="#1F2937" font-size="20" font-weight="700">‹ 返回</text>
+  <text x="368" y="71" fill="#9AA5B1" font-size="14" text-anchor="end">详情</text>
+  <!-- image -->
+  <rect x="16" y="104" width="358" height="200" rx="12" fill="#EAF0FB"/>
+  <text x="195" y="212" fill="#9AB0D9" font-size="16" text-anchor="middle">物品图片</text>
+  <!-- body -->
+  <rect x="16" y="320" width="358" height="380" rx="12" fill="#fff" stroke="#E2E8F0"/>
+  <rect x="30" y="336" width="40" height="19" rx="9" fill="#FFE3E3"/>
+  <text x="50" y="349" fill="#E03131" font-size="11" text-anchor="middle">寻物</text>
+  <text x="80" y="351" fill="#1F2937" font-size="19" font-weight="700">校园卡</text>
+  <line x1="30" y1="372" x2="360" y2="372" stroke="#EEF2F8"/>
+  <text x="30" y="400" fill="#6B7280" font-size="13">类型</text>
+  <text x="360" y="400" fill="#1F2937" font-size="13" text-anchor="end">证件</text>
+  <text x="30" y="432" fill="#6B7280" font-size="13">丢失地点</text>
+  <text x="360" y="432" fill="#1F2937" font-size="13" text-anchor="end">图书馆三楼</text>
+  <text x="30" y="464" fill="#6B7280" font-size="13">丢失时间</text>
+  <text x="360" y="464" fill="#1F2937" font-size="13" text-anchor="end">2026-09-22 14:30</text>
+  <text x="30" y="496" fill="#6B7280" font-size="13">发布者</text>
+  <text x="360" y="496" fill="#1F2937" font-size="13" text-anchor="end">李同学</text>
+  <text x="30" y="528" fill="#6B7280" font-size="13">状态</text>
+  <text x="360" y="528" fill="#E03131" font-size="13" text-anchor="end">待寻找</text>
+  <line x1="30" y1="548" x2="360" y2="548" stroke="#EEF2F8"/>
+  <text x="30" y="572" fill="#1F2937" font-size="14" font-weight="600">详细描述</text>
+  <text x="30" y="596" fill="#4B5563" font-size="13">蓝色卡套，卡面有轻微划痕，</text>
+  <text x="30" y="616" fill="#4B5563" font-size="13">姓名张明，学号20231xxx。</text>
+  <text x="30" y="640" fill="#4B5563" font-size="13">捡到者请与我联系，万分感谢！</text>
+  <text x="30" y="678" fill="#2D6CDF" font-size="13">联系方式：微信 lxm_2023</text>
+  <!-- button -->
+  <rect x="16" y="716" width="358" height="48" rx="24" fill="#2D6CDF"/>
+  <text x="195" y="746" fill="#fff" font-size="16" font-weight="600" text-anchor="middle">联系发布者</text>
+  <!-- bottom nav -->
+  <rect x="0" y="790" width="390" height="54" fill="#fff" stroke="#E2E8F0"/>
+  <text x="55" y="818" fill="#9AA5B1" font-size="12" text-anchor="middle">首页</text>
+  <text x="150" y="818" fill="#9AA5B1" font-size="12" text-anchor="middle">搜索</text>
+  <rect x="175" y="800" width="40" height="40" rx="20" fill="#2D6CDF"/>
+  <text x="195" y="826" fill="#fff" font-size="22" text-anchor="middle">+</text>
+  <text x="300" y="818" fill="#9AA5B1" font-size="12" text-anchor="middle">我的</text>
+</svg>

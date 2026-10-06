@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>校园失物招领 · 信息详情</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background:#e9edf3; display:flex; justify-content:center; padding:24px; }
+  .frame { width:390px; height:844px; background:#F2F4F7; border:3px solid #CBD2DC; border-radius:40px; position:relative; overflow:hidden; box-shadow:0 12px 40px rgba(0,0,0,.12); }
+  .notch { position:absolute; top:14px; left:50%; transform:translateX(-50%); width:96px; height:22px; background:#1F2937; border-radius:11px; z-index:50; }
+  .header { position:absolute; top:0; left:0; right:0; padding:46px 18px 14px; background:#fff; border-bottom:1px solid #E2E8F0; display:flex; justify-content:space-between; align-items:center; }
+  .back { font-size:20px; font-weight:700; color:#1F2937; text-decoration:none; } .right { font-size:14px; color:#9AA5B1; }
+  .content { position:absolute; top:114px; left:16px; right:16px; bottom:54px; overflow-y:auto; }
+  .detail-img { height:200px; background:#EAF0FB; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:54px; margin-bottom:12px; }
+  .form { background:#fff; border:1px solid #E2E8F0; border-radius:12px; padding:14px; }
+  .tag { display:inline-block; font-size:11px; padding:2px 8px; border-radius:9px; vertical-align:middle; }
+  .tag.lost { background:#FFE3E3; color:#E03131; }
+  .info-row { display:flex; justify-content:space-between; font-size:13px; padding:9px 0; border-bottom:1px solid #EEF2F8; }
+  .info-row .k { color:#6B7280; } .info-row .v { color:#1F2937; } .info-row .v.red { color:#E03131; }
+  .contact-btn { margin-top:16px; background:#2D6CDF; color:#fff; border:none; border-radius:24px; height:48px; width:100%; font-size:16px; font-weight:600; }
+  .nav { position:absolute; bottom:0; left:0; right:0; height:54px; background:#fff; border-top:1px solid #E2E8F0; display:flex; align-items:center; }
+  .nav a { flex:1; text-align:center; font-size:12px; color:#9AA5B1; text-decoration:none; }
+  .nav a.on { color:#2D6CDF; font-weight:600; }
+  .nav .plus { flex:none; width:40px; height:40px; background:#2D6CDF; color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; margin:0 8px; text-decoration:none; }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="notch"></div>
+    <div class="header">
+      <a class="back" href="home.html">‹ 返回</a><span class="right">详情</span>
+    </div>
+    <div class="content">
+      <div class="detail-img">🪪</div>
+      <div class="form">
+        <div style="margin-bottom:6px;"><span class="tag lost">寻物</span> <span style="font-size:19px;font-weight:700;color:#1F2937;">校园卡</span></div>
+        <div class="info-row"><span class="k">类型</span><span class="v">证件</span></div>
+        <div class="info-row"><span class="k">丢失地点</span><span class="v">图书馆三楼</span></div>
+        <div class="info-row"><span class="k">丢失时间</span><span class="v">2026-09-22 14:30</span></div>
+        <div class="info-row"><span class="k">发布者</span><span class="v">李同学</span></div>
+        <div class="info-row"><span class="k">状态</span><span class="v red">待寻找</span></div>
+        <div style="font-size:14px;font-weight:600;color:#1F2937;margin:12px 0 6px;">详细描述</div>
+        <div style="font-size:13px;color:#4B5563;line-height:1.6;">蓝色卡套，卡面有轻微划痕，姓名张明，学号20231xxx。捡到者请与我联系，万分感谢！</div>
+        <div style="font-size:13px;color:#2D6CDF;margin-top:8px;">联系方式：微信 lxm_2023</div>
+        <button class="contact-btn">联系发布者</button>
+      </div>
+    </div>
+    <div class="nav">
+      <a href="home.html">首页</a>
+      <a href="search.html">搜索</a>
+      <a class="plus" href="publish.html">+</a>
+      <a href="mine.html">我的</a>
+    </div>
+  </div>
+</body>
+</html>

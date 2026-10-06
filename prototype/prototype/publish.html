@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>校园失物招领 · 发布信息</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background:#e9edf3; display:flex; justify-content:center; padding:24px; }
+  .frame { width:390px; height:844px; background:#F2F4F7; border:3px solid #CBD2DC; border-radius:40px; position:relative; overflow:hidden; box-shadow:0 12px 40px rgba(0,0,0,.12); }
+  .notch { position:absolute; top:14px; left:50%; transform:translateX(-50%); width:96px; height:22px; background:#1F2937; border-radius:11px; z-index:50; }
+  .header { position:absolute; top:0; left:0; right:0; padding:46px 18px 14px; background:#fff; border-bottom:1px solid #E2E8F0; display:flex; justify-content:space-between; align-items:center; }
+  .title { font-size:18px; font-weight:700; color:#1F2937; } .cancel { color:#2D6CDF; font-size:14px; }
+  .toggle { position:absolute; top:104px; left:16px; right:16px; display:flex; background:#EEF2F8; border-radius:10px; padding:4px; }
+  .toggle div { flex:1; text-align:center; padding:9px; font-size:14px; font-weight:600; color:#4B5563; border-radius:8px; }
+  .toggle div.on { background:#2D6CDF; color:#fff; }
+  .content { position:absolute; top:164px; left:16px; right:16px; bottom:54px; overflow-y:auto; }
+  .form { background:#fff; border:1px solid #E2E8F0; border-radius:12px; padding:14px; }
+  .field { margin-bottom:14px; } .field label { font-size:14px; font-weight:600; color:#1F2937; display:block; margin-bottom:6px; }
+  .field input, .field textarea { width:100%; border:1px solid #E2E8F0; background:#F4F6F9; border-radius:8px; padding:9px 10px; font-size:13px; outline:none; }
+  .chips { display:flex; gap:8px; flex-wrap:wrap; } .chip { padding:6px 16px; border-radius:16px; font-size:13px; background:#EEF2F8; color:#4B5563; } .chip.on { background:#2D6CDF; color:#fff; }
+  .pub-btn { margin-top:14px; background:#2D6CDF; color:#fff; border:none; border-radius:23px; height:46px; width:100%; font-size:16px; font-weight:600; }
+  .nav { position:absolute; bottom:0; left:0; right:0; height:54px; background:#fff; border-top:1px solid #E2E8F0; display:flex; align-items:center; }
+  .nav a { flex:1; text-align:center; font-size:12px; color:#9AA5B1; text-decoration:none; }
+  .nav a.on { color:#2D6CDF; font-weight:600; }
+  .nav .plus { flex:none; width:40px; height:40px; background:#2D6CDF; color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; margin:0 8px; text-decoration:none; }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="notch"></div>
+    <div class="header">
+      <div class="title">发布信息</div><a class="cancel" href="home.html">取消</a>
+    </div>
+    <div class="toggle">
+      <div class="on">我丢了东西（寻物）</div><div>我捡到东西（招领）</div>
+    </div>
+    <div class="content">
+      <div class="form">
+        <div class="field"><label>物品名称 *</label><input placeholder="如：校园卡 / 雨伞 / 耳机"></div>
+        <div class="field"><label>物品类别</label>
+          <div class="chips"><div class="chip on">证件</div><div class="chip">电子用品</div><div class="chip">生活用品</div></div></div>
+        <div class="field"><label>丢失/捡到地点 *</label><input placeholder="如：图书馆三楼"></div>
+        <div class="field"><label>时间</label><input placeholder="2026-09-22 14:30"></div>
+        <div class="field"><label>详细描述</label><textarea rows="3" placeholder="颜色、特征、姓名等…"></textarea></div>
+        <div class="field"><label>联系方式 *</label><input placeholder="微信号 / 手机号"></div>
+        <div class="chip">+ 上传图片</div>
+        <button class="pub-btn">发布</button>
+      </div>
+    </div>
+    <div class="nav">
+      <a href="home.html">首页</a>
+      <a href="search.html">搜索</a>
+      <a class="plus" href="publish.html">+</a>
+      <a href="mine.html">我的</a>
+    </div>
+  </div>
+</body>
+</html>

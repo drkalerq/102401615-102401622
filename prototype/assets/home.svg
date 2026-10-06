@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 844" width="390" height="844" font-family="PingFang SC, Microsoft YaHei, sans-serif">
+  <rect x="0" y="0" width="390" height="844" rx="40" fill="#F2F4F7" stroke="#CBD2DC" stroke-width="3"/>
+  <rect x="147" y="14" width="96" height="22" rx="11" fill="#1F2937"/>
+  <!-- header -->
+  <rect x="0" y="36" width="390" height="72" fill="#2D6CDF"/>
+  <text x="22" y="66" fill="#fff" font-size="21" font-weight="700">校园失物招领</text>
+  <text x="22" y="90" fill="#DCE6FF" font-size="12">让失物更快回到主人身边</text>
+  <!-- search bar -->
+  <rect x="16" y="120" width="358" height="42" rx="21" fill="#fff" stroke="#E2E8F0"/>
+  <circle cx="38" cy="141" r="7" fill="none" stroke="#9AA5B1" stroke-width="2"/>
+  <line x1="43" y1="146" x2="49" y2="152" stroke="#9AA5B1" stroke-width="2"/>
+  <text x="60" y="146" fill="#9AA5B1" font-size="14">搜索物品名称、地点…</text>
+  <!-- filter chips -->
+  <rect x="16" y="174" width="58" height="32" rx="16" fill="#2D6CDF"/>
+  <text x="45" y="195" fill="#fff" font-size="13" text-anchor="middle">全部</text>
+  <rect x="82" y="174" width="58" height="32" rx="16" fill="#fff" stroke="#CBD2DC"/>
+  <text x="111" y="195" fill="#4B5563" font-size="13" text-anchor="middle">寻物</text>
+  <rect x="148" y="174" width="58" height="32" rx="16" fill="#fff" stroke="#CBD2DC"/>
+  <text x="177" y="195" fill="#4B5563" font-size="13" text-anchor="middle">招领</text>
+  <!-- card 1 -->
+  <rect x="16" y="220" width="358" height="96" rx="12" fill="#fff" stroke="#E2E8F0"/>
+  <rect x="28" y="232" width="72" height="72" rx="8" fill="#EAF0FB"/>
+  <text x="64" y="272" fill="#9AB0D9" font-size="13" text-anchor="middle">图片</text>
+  <rect x="112" y="238" width="40" height="19" rx="9" fill="#FFE3E3"/>
+  <text x="132" y="251" fill="#E03131" font-size="11" text-anchor="middle">寻物</text>
+  <text x="160" y="252" fill="#1F2937" font-size="16" font-weight="600">校园卡</text>
+  <text x="112" y="280" fill="#6B7280" font-size="12">图书馆三楼 · 09-22 14:30</text>
+  <text x="112" y="300" fill="#9AA5B1" font-size="11">失主：李同学 · 待寻找</text>
+  <!-- card 2 -->
+  <rect x="16" y="328" width="358" height="96" rx="12" fill="#fff" stroke="#E2E8F0"/>
+  <rect x="28" y="340" width="72" height="72" rx="8" fill="#E6F7EE"/>
+  <text x="64" y="380" fill="#7FCBA4" font-size="13" text-anchor="middle">图片</text>
+  <rect x="112" y="346" width="40" height="19" rx="9" fill="#DDF5E6"/>
+  <text x="132" y="359" fill="#1A9E5F" font-size="11" text-anchor="middle">招领</text>
+  <text x="160" y="360" fill="#1F2937" font-size="16" font-weight="600">黑色雨伞</text>
+  <text x="112" y="388" fill="#6B7280" font-size="12">食堂门口 · 09-21 12:10</text>
+  <text x="112" y="408" fill="#9AA5B1" font-size="11">拾得者：王同学 · 待认领</text>
+  <!-- card 3 -->
+  <rect x="16" y="436" width="358" height="96" rx="12" fill="#fff" stroke="#E2E8F0"/>
+  <rect x="28" y="448" width="72" height="72" rx="8" fill="#EAF0FB"/>
+  <text x="64" y="488" fill="#9AB0D9" font-size="13" text-anchor="middle">图片</text>
+  <rect x="112" y="454" width="40" height="19" rx="9" fill="#FFE3E3"/>
+  <text x="132" y="467" fill="#E03131" font-size="11" text-anchor="middle">寻物</text>
+  <text x="160" y="468" fill="#1F2937" font-size="16" font-weight="600">蓝牙耳机</text>
+  <text x="112" y="496" fill="#6B7280" font-size="12">运动场看台 · 09-20 18:00</text>
+  <text x="112" y="516" fill="#9AA5B1" font-size="11">失主：张同学 · 待寻找</text>
+  <text x="22" y="560" fill="#9AA5B1" font-size="12">— 以上为最新信息 —</text>
+  <!-- bottom nav -->
+  <rect x="0" y="790" width="390" height="54" fill="#fff" stroke="#E2E8F0"/>
+  <text x="55" y="818" fill="#2D6CDF" font-size="12" text-anchor="middle">首页</text>
+  <text x="150" y="818" fill="#9AA5B1" font-size="12" text-anchor="middle">搜索</text>
+  <rect x="175" y="800" width="40" height="40" rx="20" fill="#2D6CDF"/>
+  <text x="195" y="826" fill="#fff" font-size="22" text-anchor="middle">+</text>
+  <text x="300" y="818" fill="#9AA5B1" font-size="12" text-anchor="middle">我的</text>
+</svg>

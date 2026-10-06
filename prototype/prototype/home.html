@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>校园失物招领 · 首页</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; background:#e9edf3; display:flex; justify-content:center; padding:24px; }
+  .frame { width:390px; height:844px; background:#F2F4F7; border:3px solid #CBD2DC; border-radius:40px; position:relative; overflow:hidden; box-shadow:0 12px 40px rgba(0,0,0,.12); }
+  .notch { position:absolute; top:14px; left:50%; transform:translateX(-50%); width:96px; height:22px; background:#1F2937; border-radius:11px; z-index:50; }
+  .header { padding:46px 18px 14px; background:#2D6CDF; color:#fff; }
+  .title { font-size:20px; font-weight:700; } .sub { font-size:12px; color:#DCE6FF; margin-top:4px; }
+  .content { position:absolute; top:120px; left:0; right:0; bottom:54px; overflow-y:auto; padding:12px 16px; }
+  .searchbar { display:flex; align-items:center; background:#fff; border:1px solid #E2E8F0; border-radius:21px; height:44px; padding:0 12px; gap:8px; }
+  .icon-search { width:16px; height:16px; border:2px solid #9AA5B1; border-radius:50%; position:relative; flex:none; }
+  .icon-search::after { content:""; position:absolute; width:7px; height:2px; background:#9AA5B1; transform:rotate(45deg); top:13px; left:11px; }
+  .chips { display:flex; gap:8px; margin:12px 0; }
+  .chip { padding:6px 16px; border-radius:16px; font-size:13px; background:#fff; border:1px solid #CBD2DC; color:#4B5563; }
+  .chip.on { background:#2D6CDF; color:#fff; border-color:#2D6CDF; }
+  .card { background:#fff; border:1px solid #E2E8F0; border-radius:12px; padding:12px; display:flex; gap:12px; margin-bottom:12px; align-items:center; text-decoration:none; }
+  .thumb { width:64px; height:64px; border-radius:10px; flex:none; display:flex; align-items:center; justify-content:center; font-size:28px; background:#EAF0FB; }
+  .thumb.green { background:#E6F7EE; }
+  .tag { display:inline-block; font-size:11px; padding:2px 8px; border-radius:9px; vertical-align:middle; }
+  .tag.lost { background:#FFE3E3; color:#E03131; } .tag.found { background:#DDF5E6; color:#1A9E5F; }
+  .c-title { font-size:16px; font-weight:600; color:#1F2937; } .c-meta { font-size:12px; color:#6B7280; margin-top:6px; } .c-sub { font-size:11px; color:#9AA5B1; margin-top:4px; }
+  .nav { position:absolute; bottom:0; left:0; right:0; height:54px; background:#fff; border-top:1px solid #E2E8F0; display:flex; align-items:center; }
+  .nav a { flex:1; text-align:center; font-size:12px; color:#9AA5B1; text-decoration:none; }
+  .nav a.on { color:#2D6CDF; font-weight:600; }
+  .nav .plus { flex:none; width:40px; height:40px; background:#2D6CDF; color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; margin:0 8px; text-decoration:none; }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="notch"></div>
+    <div class="header">
+      <div class="title">校园失物招领</div>
+      <div class="sub">让失物更快回到主人身边</div>
+    </div>
+    <div class="content">
+      <a class="searchbar" href="search.html" style="text-decoration:none;">
+        <div class="icon-search"></div>
+        <span style="color:#9AA5B1;font-size:14px;">搜索物品名称、地点…</span>
+      </a>
+      <div class="chips">
+        <div class="chip on">全部</div><div class="chip">寻物</div><div class="chip">招领</div>
+      </div>
+      <a class="card" href="detail.html">
+        <div class="thumb">🪪</div>
+        <div style="flex:1;"><span class="tag lost">寻物</span> <span class="c-title">校园卡</span>
+        <div class="c-meta">图书馆三楼 · 09-22 14:30</div><div class="c-sub">失主：李同学 · 待寻找</div></div>
+      </a>
+      <a class="card" href="detail.html">
+        <div class="thumb green">☂️</div>
+        <div style="flex:1;"><span class="tag found">招领</span> <span class="c-title">黑色雨伞</span>
+        <div class="c-meta">食堂门口 · 09-21 12:10</div><div class="c-sub">拾得者：王同学 · 待认领</div></div>
+      </a>
+      <a class="card" href="detail.html">
+        <div class="thumb">🎧</div>
+        <div style="flex:1;"><span class="tag lost">寻物</span> <span class="c-title">蓝牙耳机</span>
+        <div class="c-meta">运动场看台 · 09-20 18:00</div><div class="c-sub">失主：张同学 · 待寻找</div></div>
+      </a>
+      <div style="color:#9AA5B1;font-size:12px;text-align:center;margin-top:8px;">— 以上为最新信息 —</div>
+    </div>
+    <div class="nav">
+      <a class="on" href="home.html">首页</a>
+      <a href="search.html">搜索</a>
+      <a class="plus" href="publish.html">+</a>
+      <a href="mine.html">我的</a>
+    </div>
+  </div>
+</body>
+</html>

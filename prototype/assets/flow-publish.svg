@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 360" width="680" height="360" font-family="PingFang SC, Microsoft YaHei, sans-serif">
+  <rect x="0" y="0" width="680" height="360" fill="#ffffff"/>
+  <text x="24" y="34" fill="#1F2937" font-size="18" font-weight="700">流程二：发布信息 → 发布成功</text>
+  <!-- boxes -->
+  <rect x="40" y="90" width="130" height="56" rx="12" fill="#2D6CDF"/>
+  <text x="105" y="124" fill="#fff" font-size="14" font-weight="600" text-anchor="middle">进入发布页</text>
+
+  <rect x="210" y="90" width="130" height="56" rx="12" fill="#fff" stroke="#2D6CDF" stroke-width="2"/>
+  <text x="275" y="116" fill="#1F2937" font-size="13" text-anchor="middle">选择类型</text>
+  <text x="275" y="134" fill="#6B7280" font-size="11" text-anchor="middle">寻物 / 招领</text>
+
+  <rect x="380" y="90" width="150" height="56" rx="12" fill="#fff" stroke="#2D6CDF" stroke-width="2"/>
+  <text x="455" y="116" fill="#1F2937" font-size="13" text-anchor="middle">填写物品信息</text>
+  <text x="455" y="134" fill="#6B7280" font-size="11" text-anchor="middle">名称/地点/描述</text>
+
+  <rect x="380" y="220" width="150" height="56" rx="12" fill="#1A9E5F"/>
+  <text x="455" y="254" fill="#fff" font-size="14" font-weight="600" text-anchor="middle">发布成功</text>
+
+  <!-- arrows -->
+  <line x1="170" y1="118" x2="208" y2="118" stroke="#9AA5B1" stroke-width="2"/>
+  <polygon points="208,118 200,113 200,123" fill="#9AA5B1"/>
+  <line x1="340" y1="118" x2="378" y2="118" stroke="#9AA5B1" stroke-width="2"/>
+  <polygon points="378,118 370,113 370,123" fill="#9AA5B1"/>
+  <line x1="455" y1="146" x2="455" y2="218" stroke="#9AA5B1" stroke-width="2"/>
+  <polygon points="455,218 450,210 460,210" fill="#9AA5B1"/>
+  <!-- validation note -->
+  <rect x="40" y="220" width="180" height="56" rx="12" fill="#FFF7E6" stroke="#FFD591"/>
+  <text x="130" y="246" fill="#AD6800" font-size="12" text-anchor="middle">表单校验</text>
+  <text x="130" y="264" fill="#AD6800" font-size="11" text-anchor="middle">必填项未填则提示</text>
+  <line x1="220" y1="248" x2="378" y2="248" stroke="#FFD591" stroke-width="2" stroke-dasharray="5,4"/>
+  <polygon points="378,248 370,243 370,253" fill="#FFD591"/>
+  <text x="24" y="320" fill="#6B7280" font-size="13">说明：用户在发布页选择“寻物”或“招领”，填写物品名称、地点、时间、描述与联系方式后点击</text>
+  <text x="24" y="342" fill="#6B7280" font-size="13">“发布”；系统校验必填项，通过后生成一条信息并展示在首页信息流中。</text>
+</svg>

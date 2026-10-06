@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>校园失物招领小程序 · 交互原型</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #e9edf3; color: #1F2937;
+    display: flex; justify-content: center; align-items: flex-start;
+    padding: 24px; gap: 24px; flex-wrap: wrap;
+  }
+  .frame {
+    width: 390px; height: 844px; background: #F2F4F7;
+    border: 3px solid #CBD2DC; border-radius: 40px;
+    position: relative; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,.12);
+  }
+  .notch { position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+    width: 96px; height: 22px; background: #1F2937; border-radius: 11px; z-index: 50; }
+  .screen { position: absolute; inset: 0; display: none; flex-direction: column; }
+  .screen.active { display: flex; }
+  .header { padding: 46px 18px 12px; }
+  .header.blue { background: #2D6CDF; color: #fff; }
+  .header.white { background: #fff; border-bottom: 1px solid #E2E8F0; }
+  .header.white { display: flex; justify-content: space-between; align-items: center; }
+  .title { font-size: 20px; font-weight: 700; }
+  .sub { font-size: 12px; color: #DCE6FF; margin-top: 4px; }
+  .back { font-size: 20px; font-weight: 700; cursor: pointer; color: #1F2937; }
+  .content { flex: 1; overflow-y: auto; padding: 12px 16px 70px; }
+  .searchbar { display: flex; align-items: center; background: #fff; border: 1px solid #E2E8F0;
+    border-radius: 21px; height: 44px; padding: 0 12px; gap: 8px; }
+  .searchbar.focus { border-color: #2D6CDF; }
+  .searchbar input { border: none; outline: none; flex: 1; font-size: 14px; }
+  .icon-search { width: 16px; height: 16px; border: 2px solid #9AA5B1; border-radius: 50%; position: relative; flex: none; }
+  .icon-search::after { content:""; position:absolute; width:7px; height:2px; background:#9AA5B1;
+    transform: rotate(45deg); top: 13px; left: 11px; }
+  .btn-search { background:#2D6CDF; color:#fff; border:none; border-radius:13px; height:28px;
+    padding:0 14px; font-size:13px; flex:none; cursor:pointer; }
+  .chips { display: flex; gap: 8px; margin: 12px 0; flex-wrap: wrap; }
+  .chip { padding: 6px 16px; border-radius: 16px; font-size: 13px; background:#fff; border:1px solid #CBD2DC; color:#4B5563; cursor:pointer; }
+  .chip.on { background:#2D6CDF; color:#fff; border-color:#2D6CDF; }
+  .card { background:#fff; border:1px solid #E2E8F0; border-radius:12px; padding:12px; display:flex; gap:12px; margin-bottom:12px; cursor:pointer; align-items:center; transition:.15s; }
+  .card:active { transform: scale(.99); }
+  .thumb { width:64px; height:64px; border-radius:10px; flex:none; display:flex; align-items:center; justify-content:center; font-size:28px; background:#EAF0FB; }
+  .thumb.green { background:#E6F7EE; }
+  .tag { display:inline-block; font-size:11px; padding:2px 8px; border-radius:9px; vertical-align:middle; }
+  .tag.lost { background:#FFE3E3; color:#E03131; }
+  .tag.found { background:#DDF5E6; color:#1A9E5F; }
+  .c-title { font-size:16px; font-weight:600; color:#1F2937; }
+  .c-meta { font-size:12px; color:#6B7280; margin-top:6px; }
+  .c-sub { font-size:11px; color:#9AA5B1; margin-top:4px; }
+  .form { background:#fff; border:1px solid #E2E8F0; border-radius:12px; padding:14px; }
+  .field { margin-bottom:14px; }
+  .field label { font-size:14px; font-weight:600; color:#1F2937; display:block; margin-bottom:6px; }
+  .field input, .field textarea { width:100%; border:1px solid #E2E8F0; background:#F4F6F9; border-radius:8px;
+    padding:9px 10px; font-size:13px; outline:none; }
+  .toggle { display:flex; background:#EEF2F8; border-radius:10px; padding:4px; margin:12px 16px; }
+  .toggle div { flex:1; text-align:center; padding:9px; font-size:14px; font-weight:600; color:#4B5563; border-radius:8px; cursor:pointer; }
+  .toggle div.on { background:#2D6CDF; color:#fff; }
+  .pub-btn { margin:14px 16px; background:#2D6CDF; color:#fff; border:none; border-radius:23px;
+    height:46px; font-size:16px; font-weight:600; cursor:pointer; width: calc(100% - 32px); }
+  .detail-img { height:200px; background:#EAF0FB; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:54px; margin-bottom:12px; }
+  .info-row { display:flex; justify-content:space-between; font-size:13px; padding:9px 0; border-bottom:1px solid #EEF2F8; }
+  .info-row .k { color:#6B7280; } .info-row .v { color:#1F2937; }
+  .info-row .v.red { color:#E03131; } .info-row .v.green { color:#1A9E5F; }
+  .contact-btn { margin-top:16px; background:#2D6CDF; color:#fff; border:none; border-radius:24px; height:48px; width:100%; font-size:16px; font-weight:600; cursor:pointer; }
+  .profile { background:#2D6CDF; color:#fff; padding:24px 18px; display:flex; gap:14px; align-items:center; }
+  .avatar { width:56px; height:56px; border-radius:50%; background:#fff; color:#2D6CDF; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:700; }
+  .stats { display:flex; gap:10px; margin:12px 16px; }
+  .stat { flex:1; background:#fff; border:1px solid #E2E8F0; border-radius:12px; text-align:center; padding:10px; }
+  .stat .n { font-size:22px; font-weight:700; color:#2D6CDF; }
+  .stat .n.g { color:#1A9E5F; } .stat .n.gr { color:#9AA5B1; }
+  .stat .l { font-size:12px; color:#6B7280; }
+  .nav { position:absolute; bottom:0; left:0; right:0; height:54px; background:#fff; border-top:1px solid #E2E8F0; display:flex; align-items:center; }
+  .nav .item { flex:1; text-align:center; font-size:12px; color:#9AA5B1; cursor:pointer; }
+  .nav .item.on { color:#2D6CDF; font-weight:600; }
+  .nav .plus { flex:none; width:40px; height:40px; background:#2D6CDF; color:#fff; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:22px; margin:0 8px; cursor:pointer; }
+  .toast { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,.8);
+    color:#fff; padding:14px 22px; border-radius:10px; font-size:15px; display:none; z-index:99; text-align:center; }
+  .empty { text-align:center; color:#9AA5B1; font-size:13px; padding:30px 0; }
+  .side { max-width: 360px; }
+  .side h2 { font-size:18px; margin-bottom:8px; }
+  .side p { font-size:14px; color:#4B5563; line-height:1.7; margin-bottom:10px; }
+  .side code { background:#EEF2F8; padding:2px 6px; border-radius:4px; font-size:13px; }
+  .side .tip { background:#FFF7E6; border:1px solid #FFD591; border-radius:10px; padding:10px 12px; font-size:13px; color:#AD6800; }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="notch"></div>
+
+    <!-- 首页 -->
+    <div class="screen active" id="home">
+      <div class="header blue">
+        <div class="title">校园失物招领</div>
+        <div class="sub">让失物更快回到主人身边</div>
+      </div>
+      <div class="content">
+        <div class="searchbar" onclick="go('search')">
+          <div class="icon-search"></div>
+          <span style="color:#9AA5B1;font-size:14px;">搜索物品名称、地点…</span>
+        </div>
+        <div class="chips" id="home-chips">
+          <div class="chip on" data-f="全部" onclick="setHomeFilter(this)">全部</div>
+          <div class="chip" data-f="寻物" onclick="setHomeFilter(this)">寻物</div>
+          <div class="chip" data-f="招领" onclick="setHomeFilter(this)">招领</div>
+        </div>
+        <div id="home-list"></div>
+      </div>
+      <div class="nav">
+        <div class="item on" onclick="go('home')">首页</div>
+        <div class="item" onclick="go('search')">搜索</div>
+        <div class="plus" onclick="go('publish')">+</div>
+        <div class="item" onclick="go('mine')">我的</div>
+      </div>
+    </div>
+
+    <!-- 发布 -->
+    <div class="screen" id="publish">
+      <div class="header white">
+        <div class="title">发布信息</div><div style="color:#2D6CDF;font-size:14px;cursor:pointer;" onclick="go('home')">取消</div>
+      </div>
+      <div class="toggle">
+        <div class="on" id="t-lost" onclick="switchType('lost')">我丢了东西（寻物）</div>
+        <div id="t-found" onclick="switchType('found')">我捡到东西（招领）</div>
+      </div>
+      <div class="content">
+        <div class="form">
+          <div class="field"><label>物品名称 *</label><input id="f-name" placeholder="如：校园卡 / 雨伞 / 耳机"></div>
+          <div class="field"><label>物品类别</label>
+            <div class="chips"><div class="chip on" data-c="证件" onclick="setCat(this)">证件</div><div class="chip" data-c="电子用品" onclick="setCat(this)">电子用品</div><div class="chip" data-c="生活用品" onclick="setCat(this)">生活用品</div></div></div>
+          <div class="field"><label>丢失/捡到地点 *</label><input id="f-place" placeholder="如：图书馆三楼"></div>
+          <div class="field"><label>时间</label><input id="f-time" placeholder="2026-09-22 14:30"></div>
+          <div class="field"><label>详细描述</label><textarea id="f-desc" rows="3" placeholder="颜色、特征、姓名等…"></textarea></div>
+          <div class="field"><label>联系方式 *</label><input id="f-contact" placeholder="微信号 / 手机号"></div>
+          <div class="chip" onclick="toast('演示原型：图片上传略')">+ 上传图片</div>
+        </div>
+        <button class="pub-btn" onclick="publish()">发布</button>
+      </div>
+      <div class="nav">
+        <div class="item" onclick="go('home')">首页</div>
+        <div class="item" onclick="go('search')">搜索</div>
+        <div class="plus" onclick="go('publish')">+</div>
+        <div class="item" onclick="go('mine')">我的</div>
+      </div>
+    </div>
+
+    <!-- 搜索 -->
+    <div class="screen" id="search">
+      <div class="header white"><div class="title">搜索</div></div>
+      <div class="content">
+        <div class="searchbar focus">
+          <div class="icon-search"></div>
+          <input value="校园卡" id="kw">
+          <button class="btn-search" onclick="doSearch()">搜索</button>
+        </div>
+        <div style="font-size:12px;color:#6B7280;margin:12px 0 6px;">按类别筛选：</div>
+        <div class="chips"><div class="chip on" onclick="setSearchCat(this)">全部</div><div class="chip" onclick="setSearchCat(this)">证件</div><div class="chip" onclick="setSearchCat(this)">电子用品</div><div class="chip" onclick="setSearchCat(this)">生活用品</div></div>
+        <div id="search-result-label" style="font-size:12px;color:#9AA5B1;margin:12px 0 6px;"></div>
+        <div id="search-list"></div>
+      </div>
+      <div class="nav">
+        <div class="item" onclick="go('home')">首页</div>
+        <div class="item on" onclick="go('search')">搜索</div>
+        <div class="plus" onclick="go('publish')">+</div>
+        <div class="item" onclick="go('mine')">我的</div>
+      </div>
+    </div>
+
+    <!-- 详情 -->
+    <div class="screen" id="detail">
+      <div class="header white">
+        <div class="back" onclick="go(backFrom)">‹ 返回</div><div style="font-size:14px;color:#9AA5B1;">详情</div>
+      </div>
+      <div class="content">
+        <div class="detail-img" id="d-img">📦</div>
+        <div class="form">
+          <div style="margin-bottom:6px;"><span class="tag" id="d-tag">寻物</span> <span id="d-title" style="font-size:19px;font-weight:700;color:#1F2937;"></span></div>
+          <div class="info-row"><span class="k">类型</span><span class="v" id="d-cat"></span></div>
+          <div class="info-row"><span class="k">地点</span><span class="v" id="d-place"></span></div>
+          <div class="info-row"><span class="k">时间</span><span class="v" id="d-time"></span></div>
+          <div class="info-row"><span class="k">发布者</span><span class="v" id="d-owner"></span></div>
+          <div class="info-row"><span class="k">状态</span><span class="v" id="d-status"></span></div>
+          <div style="font-size:14px;font-weight:600;color:#1F2937;margin:12px 0 6px;">详细描述</div>
+          <div id="d-desc" style="font-size:13px;color:#4B5563;line-height:1.6;"></div>
+          <div id="d-contact" style="font-size:13px;color:#2D6CDF;margin-top:8px;"></div>
+          <button class="contact-btn" onclick="toast('已复制联系方式，可前往联系发布者')">联系发布者</button>
+        </div>
+      </div>
+      <div class="nav">
+        <div class="item" onclick="go('home')">首页</div>
+        <div class="item" onclick="go('search')">搜索</div>
+        <div class="plus" onclick="go('publish')">+</div>
+        <div class="item" onclick="go('mine')">我的</div>
+      </div>
+    </div>
+
+    <!-- 我的 -->
+    <div class="screen" id="mine">
+      <div class="profile">
+        <div class="avatar">我</div>
+        <div><div style="font-size:18px;font-weight:700;">李同学</div>
+        <div style="font-size:12px;color:#DCE6FF;" id="mine-summary"></div></div>
+      </div>
+      <div class="content">
+        <div class="stats" id="mine-stats"></div>
+        <div style="font-size:13px;color:#6B7280;margin:12px 0 6px;">我的发布</div>
+        <div id="mine-list"></div>
+      </div>
+      <div class="nav">
+        <div class="item" onclick="go('home')">首页</div>
+        <div class="item" onclick="go('search')">搜索</div>
+        <div class="plus" onclick="go('publish')">+</div>
+        <div class="item on" onclick="go('mine')">我的</div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+  </div>
+
+  <div class="side">
+    <h2>校园失物招领 · 交互原型</h2>
+    <p>这是一个<strong>数据驱动</strong>的手机原型，覆盖作业全部页面与三条演示流程：</p>
+    <p>① 首页 → 点卡片 → 详情（查看信息 → 查看详情）<br>
+       ② 底部「+」→ 发布页 → 选类型 → 填写 → 发布（发布信息 → 发布成功，新信息会进入首页与"我的"）<br>
+       ③ 搜索页 → 输入关键词 → 实时结果（搜索物品 → 查看结果）</p>
+    <p><b>托管为在线链接：</b>把本文件夹推送到 GitHub 并开启 <code>Pages</code>，即可得到可分享、可点击的原型链接。</p>
+    <div class="tip">提示：所有页面、跳转、搜索、发布均为真实交互；占位数据可在源码 <code>items</code> 数组中修改。</div>
+  </div>
+
+<script>
+  const EMOJI = { "证件":"🪪", "电子用品":"🎧", "生活用品":"☂️" };
+  const def = w => EMOJI[w] || "📦";
+  let backFrom = "home";
+  let pubType = "lost";
+  let pubCat = "证件";
+  let homeFilter = "全部";
+  let searchCat = "全部";
+  let curId = null;
+
+  // 数据：mine=true 表示"我发布的"
+  let items = [
+    {id:1, type:"lost", title:"校园卡", cat:"证件", place:"图书馆三楼", time:"09-22 14:30",
+     desc:"蓝色卡套，卡面有轻微划痕，姓名张明，学号20231xxx。捡到者请与我联系，万分感谢！",
+     contact:"微信 lxm_2023", status:"待寻找", owner:"李同学", mine:false},
+    {id:2, type:"found", title:"黑色雨伞", cat:"生活用品", place:"食堂门口", time:"09-21 12:10",
+     desc:"一把黑色长柄雨伞，放在食堂门口失物箱旁，请失主认领。",
+     contact:"微信 w_2023", status:"待认领", owner:"王同学", mine:false},
+    {id:3, type:"lost", title:"蓝牙耳机", cat:"电子用品", place:"运动场看台", time:"09-20 18:00",
+     desc:"白色蓝牙耳机左耳，运动场看台遗失，拾到请联系，必有谢意。",
+     contact:"微信 z_2023", status:"待寻找", owner:"张同学", mine:false},
+    {id:4, type:"lost", title:"校园卡", cat:"证件", place:"图书馆一楼", time:"09-19 10:00",
+     desc:"蓝色卡套校园卡，姓名陈晓。", contact:"微信 cx_2023", status:"已找回", owner:"我", mine:true},
+    {id:5, type:"found", title:"黑色雨伞", cat:"生活用品", place:"教学楼A", time:"09-18 09:30",
+     desc:"教学楼A捡到黑色折叠伞。", contact:"微信 me_2023", status:"已归还", owner:"我", mine:true}
+  ];
+  let seq = 100;
+
+  function statusClass(s){ return (s==="已找回"||s==="已归还") ? "green" : "red"; }
+  function tagHtml(it){ return `<span class="tag ${it.type==='lost'?'lost':'found'}">${it.type==='lost'?'寻物':'招领'}</span>`; }
+  function cardHtml(it){
+    return `<div class="card" onclick="openDetail(${it.id},'home')">
+      <div class="thumb ${it.type==='found'?'green':''}">${def(it.cat)}</div>
+      <div style="flex:1;min-width:0;">
+        ${tagHtml(it)} <span class="c-title">${it.title}</span>
+        <div class="c-meta">${it.place} · ${it.time}</div>
+        <div class="c-sub">${it.type==='lost'?'失主':'拾得者'}：${it.owner} · ${it.status}</div>
+      </div></div>`;
+  }
+
+  function renderHome(){
+    const list = items.filter(it =>
+      homeFilter==="全部" ? true : (homeFilter==="寻物" ? it.type==="lost" : it.type==="found"));
+    const box = document.getElementById("home-list");
+    box.innerHTML = list.length ? list.map(cardHtml).join("")
+      : `<div class="empty">暂无相关信息</div>`;
+  }
+  function setHomeFilter(el){
+    document.querySelectorAll("#home-chips .chip").forEach(c=>c.classList.remove("on"));
+    el.classList.add("on"); homeFilter = el.dataset.f; renderHome();
+  }
+
+  function renderSearch(){
+    const kw = (document.getElementById("kw").value||"").trim();
+    const list = items.filter(it =>
+      (searchCat==="全部" || it.cat===searchCat) &&
+      (kw==="" || (it.title+it.place+it.cat).includes(kw)));
+    document.getElementById("search-result-label").textContent = `搜索结果（${list.length} 条）`;
+    const box = document.getElementById("search-list");
+    box.innerHTML = list.length ? list.map(it=>cardHtml(it).replace("openDetail("+it.id+",'home')","openDetail("+it.id+",'search')")).join("")
+      : `<div class="empty">没有找到“${kw}”相关信息</div>`;
+  }
+  function doSearch(){ renderSearch(); }
+  function setSearchCat(el){
+    document.querySelectorAll("#search .chips .chip").forEach(c=>c.classList.remove("on"));
+    el.classList.add("on"); searchCat = el.textContent; renderSearch();
+  }
+
+  function openDetail(id, from){
+    const it = items.find(x=>x.id===id); if(!it) return;
+    curId = id; backFrom = from;
+    document.getElementById("d-img").textContent = def(it.cat);
+    const tg = document.getElementById("d-tag");
+    tg.className = "tag " + (it.type==='lost'?'lost':'found');
+    tg.textContent = it.type==='lost'?'寻物':'招领';
+    document.getElementById("d-title").textContent = it.title;
+    document.getElementById("d-cat").textContent = it.cat;
+    document.getElementById("d-place").textContent = it.place;
+    document.getElementById("d-time").textContent = it.time;
+    document.getElementById("d-owner").textContent = it.owner;
+    const st = document.getElementById("d-status"); st.textContent = it.status;
+    st.className = "v " + statusClass(it.status);
+    document.getElementById("d-desc").textContent = it.desc;
+    document.getElementById("d-contact").textContent = "联系方式：" + it.contact;
+    go("detail");
+  }
+
+  function renderMine(){
+    const mine = items.filter(it=>it.mine);
+    const seeking = mine.filter(i=>i.type==="lost"&&i.status==="待寻找").length;
+    const found = mine.filter(i=>(i.status==="已找回"||i.status==="已归还")).length;
+    const founding = mine.filter(i=>i.type==="found"&&i.status==="待认领").length;
+    document.getElementById("mine-summary").textContent = `已发布 ${mine.length} 条 · 已找回/归还 ${found} 条`;
+    document.getElementById("mine-stats").innerHTML =
+      `<div class="stat"><div class="n">${seeking}</div><div class="l">寻物中</div></div>
+       <div class="stat"><div class="n g">${found}</div><div class="l">已找回</div></div>
+       <div class="stat"><div class="n gr">${founding}</div><div class="l">招领中</div></div>`;
+    const box = document.getElementById("mine-list");
+    box.innerHTML = mine.length ? mine.map(it=>{
+      const sc = statusClass(it.status);
+      const stTxt = it.status;
+      return `<div class="card">
+        <div class="thumb ${it.type==='found'?'green':''}">${def(it.cat)}</div>
+        <div style="flex:1;min-width:0;"><span class="c-title">${it.title}</span>
+          <div class="c-sub">${it.time} 发布 · ${it.type==='lost'?'寻物':'招领'}</div></div>
+        <div style="text-align:right;"><span class="tag ${sc==='green'?'found':'lost'}">${stTxt}</span>
+          <div style="font-size:12px;margin-top:6px;color:${sc==='green'?'#9AA5B1':'#2D6CDF'};">${sc==='green'?'删除':'编辑'}</div></div>
+      </div>`;
+    }).join("") : `<div class="empty">你还没有发布信息</div>`;
+  }
+
+  function switchType(t){
+    pubType = t;
+    document.getElementById("t-lost").classList.toggle("on", t==="lost");
+    document.getElementById("t-found").classList.toggle("on", t==="found");
+  }
+  function setCat(el){
+    document.querySelectorAll("#publish .form .chips .chip").forEach(c=>c.classList.remove("on"));
+    el.classList.add("on"); pubCat = el.dataset.c;
+  }
+  function publish(){
+    const name = document.getElementById("f-name").value.trim();
+    const place = document.getElementById("f-place").value.trim();
+    const contact = document.getElementById("f-contact").value.trim();
+    if(!name || !place || !contact){ toast("请填写带 * 的必填项"); return; }
+    const it = {
+      id: ++seq, type: pubType, title: name, cat: pubCat,
+      place, time: document.getElementById("f-time").value.trim() || "刚刚",
+      desc: document.getElementById("f-desc").value.trim() || "（无补充描述）",
+      contact, status: pubType==="lost" ? "待寻找" : "待认领", owner:"我", mine:true
+    };
+    items.unshift(it);
+    // reset form
+    ["f-name","f-place","f-time","f-desc","f-contact"].forEach(i=>document.getElementById(i).value="");
+    toast("发布成功！信息已展示在首页"); setTimeout(()=>go("home"), 900);
+  }
+
+  function go(id){
+    document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+    if(id==="home") renderHome();
+    if(id==="search") renderSearch();
+    if(id==="mine") renderMine();
+  }
+  let tt;
+  function toast(msg){
+    const t=document.getElementById("toast"); t.textContent=msg; t.style.display="block";
+    clearTimeout(tt); tt=setTimeout(()=>t.style.display="none",1400);
+  }
+  // 初始化
+  renderHome();
+</script>
+</body>
+</html>
