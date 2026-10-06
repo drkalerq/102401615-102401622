@@ -100,3 +100,8 @@ a.item-card:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px;
 .secondary-button { background: #edf3ff; color: var(--blue); border: 1px solid #ccdbf7; border-radius: 8px; font-size: 12px; padding: 9px 12px; }
 .contact-value { display: block; width: 100%; border: 1px solid #ced7e4; padding: 10px; color: var(--ink); border-radius: 8px; font: inherit; font-size: 13px; resize: vertical; margin: 10px 0; }
 .contact-value:focus { outline: 2px solid var(--blue); }
+
+/* 多项管理操作在窄屏上自动换行。 */
+.mine-actions { flex-wrap: wrap; }
+.danger-button { color: #b42318; border-color: #f5c6c2; }
+#edit-cancel { margin-bottom: 12px; width: 100%; }

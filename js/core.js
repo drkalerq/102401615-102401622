@@ -86,7 +86,26 @@
     if (!['active', 'completed'].includes(status)) throw new Error('状态无效。');
     return items.map(current => current.id === id ? Object.assign({}, current, {status}) : current);
   }
-  const api = { categories, filterItems, statusLabel, normalizeInput, validatePost, createPost, searchItems, findItem, myItems, mySummary, changeStatus };
+  function editableItem(items, id) {
+    const item = findItem(items, id);
+    if (!item) throw new Error('这条信息已不存在。');
+    if (!item.isMine) throw new Error('只能管理自己的发布。');
+    return item;
+  }
+  function editPost(items, id, input) {
+    const original = editableItem(items, id);
+    const checked = validatePost(input);
+    if (!checked.valid) throw new Error(Object.values(checked.errors)[0]);
+    const updated = Object.assign({}, original, checked.data, {
+      eventTime: checked.data.eventTime.replace('T', ' ') || original.eventTime
+    });
+    return items.map(item => item.id === id ? updated : item);
+  }
+  function deletePost(items, id) {
+    editableItem(items, id);
+    return items.filter(item => item.id !== id);
+  }
+  const api = { categories, filterItems, statusLabel, normalizeInput, validatePost, createPost, searchItems, findItem, myItems, mySummary, changeStatus, editPost, deletePost };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.LostFoundCore = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this);

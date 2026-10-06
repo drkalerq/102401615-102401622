@@ -45,7 +45,28 @@
           }
           feedback.hidden = false;
         });
-        actions.append(button);
+        const edit = el('button','secondary-button','编辑');
+        edit.type = 'button';
+        edit.disabled = !context.writable;
+        edit.addEventListener('click',function () { context.startEditing(item.id); });
+        const remove = el('button','secondary-button danger-button','删除');
+        remove.type = 'button';
+        remove.disabled = !context.writable;
+        remove.addEventListener('click',function () {
+          if (!window.confirm('确认删除“' + item.title + '”？删除后无法恢复。')) return;
+          try {
+            const result = context.saveItems(context.core.deletePost(context.getItems(),item.id));
+            if (!result.ok) throw new Error(result.error);
+            render();
+            feedback.className = 'notice success-notice';
+            feedback.textContent = '信息已删除，并已保存。';
+          } catch (error) {
+            feedback.className = 'notice error-notice';
+            feedback.textContent = error.message || '删除失败。';
+          }
+          feedback.hidden = false;
+        });
+        actions.append(button,edit,remove);
         entry.append(actions);
         list.append(entry);
       });

@@ -15,6 +15,8 @@
   const icons = { '证件': '🪪', '电子用品': '🎧', '生活用品': '☂️', '书籍文具': '📚', '其他': '📦' };
   let homeFilter = 'all';
   let detailFrom = 'home';
+  let editingId = null;
+  let publishDraft = null;
 
   function element(tag, className, text) {
     const node = document.createElement(tag);
@@ -54,6 +56,10 @@
   }
   function navigate(page) {
     if (!['home', 'search', 'publish', 'mine', 'detail'].includes(page)) return;
+    if (editingId && page !== 'publish') {
+      if (!window.confirm('离开将放弃本次编辑，确认离开？')) return;
+      finishEditing();
+    }
     document.querySelectorAll('.page').forEach(function (section) { section.hidden = section.id !== page + '-page'; });
     document.querySelectorAll('.nav-item').forEach(function (button) {
       const active = button.dataset.page === (page === 'detail' ? detailFrom : page);
@@ -72,7 +78,7 @@
     if (result.ok) items = nextItems;
     return result;
   }
-  const minePage = window.LostFoundMyPosts.create({ core, getItems: () => items, createCard, element, saveItems, writable: loaded.writable });
+  const minePage = window.LostFoundMyPosts.create({ core, getItems: () => items, createCard, element, saveItems, writable: loaded.writable, startEditing });
   const searchPage = window.LostFoundSearch.create({ core, getItems: () => items, createCard, element });
   const detailPage = window.LostFoundDetail.create({ core, getItems: () => items, icons, element });
   document.getElementById('detail-back').addEventListener('click', function () { navigate(detailFrom); });
@@ -102,15 +108,50 @@
       else field.removeAttribute('aria-describedby');
     });
   }
+  function formValues() { return Object.fromEntries(new FormData(form)); }
+  function fillForm(values) {
+    ['type', 'title', 'category', 'place', 'eventTime', 'description', 'contact'].forEach(function (key) {
+      form.elements.namedItem(key).value = values[key] || '';
+    });
+  }
+  function editLabels(active) {
+    document.getElementById('publish-title').textContent = active ? '编辑我的发布' : '发布信息';
+    document.getElementById('publish-submit').textContent = active ? '保存修改' : '发布信息';
+    document.getElementById('event-time-hint').textContent = active ? '不填则保留原来的丢失／捡到时间。' : '不填则使用发布时刻。';
+    document.getElementById('edit-cancel').hidden = !active;
+    showErrors({});
+    document.getElementById('publish-error').hidden = true;
+  }
+  function finishEditing() {
+    editingId = null;
+    if (publishDraft) fillForm(publishDraft);
+    publishDraft = null;
+    editLabels(false);
+  }
+  function startEditing(id) {
+    const item = core.findItem(items, id);
+    if (!loaded.writable || !item || !item.isMine) return;
+    publishDraft = formValues();
+    editingId = id;
+    fillForm(Object.assign({}, item, {eventTime: item.eventTime.replace(' ', 'T')}));
+    editLabels(true);
+    navigate('publish');
+    document.getElementById('f-title').focus();
+  }
+  document.getElementById('edit-cancel').addEventListener('click', function () {
+    if (!window.confirm('确认放弃本次编辑？原信息不会改变。')) return;
+    finishEditing();
+    navigate('mine');
+  });
   form.addEventListener('submit', function (event) {
     event.preventDefault();
-    const input = Object.fromEntries(new FormData(form));
+    const input = formValues();
     const checked = core.validatePost(input);
     showErrors(checked.errors);
     const failure = document.getElementById('publish-error');
     failure.hidden = true;
     if (!checked.valid) {
-      failure.textContent = '发布未完成：' + Object.values(checked.errors)[0];
+      failure.textContent = (editingId ? '修改未完成：' : '发布未完成：') + Object.values(checked.errors)[0];
       failure.hidden = false;
       const first = form.querySelector('[aria-invalid="true"]');
       if (first) first.focus();
@@ -119,6 +160,18 @@
     const submit = document.getElementById('publish-submit');
     submit.disabled = true;
     try {
+      const wasEditing = Boolean(editingId);
+      if (wasEditing) {
+        const result = saveItems(core.editPost(items, editingId, checked.data));
+        if (!result.ok) throw new Error(result.error);
+        finishEditing();
+        navigate('mine');
+        const feedback = document.getElementById('mine-feedback');
+        feedback.className = 'notice success-notice';
+        feedback.textContent = '修改已保存，发布编号和完成状态保持不变。';
+        feedback.hidden = false;
+        return;
+      }
       let id;
       do {
         id = window.crypto && typeof window.crypto.randomUUID === 'function'
