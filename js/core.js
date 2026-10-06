@@ -54,7 +54,22 @@
       owner: '我', isMine: true, status: 'active', image: ''
     });
   }
-  const api = { categories, filterItems, statusLabel, normalizeInput, validatePost, createPost };
+  function searchItems(items, options) {
+    const opts = options || {};
+    const type = opts.type || 'all';
+    const category = opts.category || 'all';
+    const words = String(opts.keyword || '').trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
+    return filterItems(items, type).filter(function (item) {
+      if (category !== 'all' && item.category !== category) return false;
+      if (opts.activeOnly && item.status !== 'active') return false;
+      const haystack = [item.title, item.place, item.category, item.description].join(' ').toLocaleLowerCase();
+      return words.every(word => haystack.includes(word));
+    });
+  }
+  function findItem(items, id) {
+    return items.find(item => item.id === id) || null;
+  }
+  const api = { categories, filterItems, statusLabel, normalizeInput, validatePost, createPost, searchItems, findItem };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.LostFoundCore = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this);

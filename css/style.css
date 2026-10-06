@@ -65,3 +65,28 @@ h2 { font-size: 18px; margin: 0; }
 .success-notice { background: #e5f5ee; color: #18744b; border: 1px solid #b8e2ce; }
 .submit-button { width: 100%; margin-top: 0; }
 button:disabled { cursor: not-allowed; opacity: .55; }
+a.item-card { color: inherit; text-decoration: none; transition: border-color .15s, background .15s; }
+a.item-card:hover { border-color: #8eafea; background: #fafcff; }
+a.item-card:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.search-form { border: 1px solid var(--line); background: white; border-radius: 14px; padding: 16px; }
+.search-input-row { display: flex; gap: 8px; }
+.search-input-row input { flex: 1; min-width: 0; }
+.search-input-row .primary-button { margin: 0; padding: 10px 14px; flex: none; font-size: 13px; }
+.search-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.search-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.checkbox-label { display: flex; align-items: center; gap: 5px; color: var(--muted); font-size: 12px; }
+.checkbox-label input { accent-color: var(--blue); }
+.text-button, .back-button { border: 0; color: var(--blue); background: transparent; padding: 8px 0; font-size: 12px; }
+.back-button { margin-bottom: 14px; }
+.results-heading { margin: 0; font-size: 16px; }
+.detail-panel { background: white; border: 1px solid var(--line); border-radius: 15px; padding: 18px; margin-top: 18px; }
+.detail-image { display: grid; place-items: center; height: 155px; background: #eaf0fb; font-size: 60px; border-radius: 12px; margin-bottom: 18px; }
+.detail-item-title { font-size: 22px; margin: 14px 0; overflow-wrap: anywhere; }
+.detail-info { margin: 0; }
+.detail-row { display: flex; align-items: baseline; gap: 12px; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 12px; }
+.detail-row dt { color: var(--muted); flex: 0 0 100px; }
+.detail-row dd { margin: 0; text-align: right; overflow-wrap: anywhere; min-width: 0; }
+.detail-subtitle { font-size: 13px; margin: 20px 0 8px; }
+.detail-description, .contact-text { font-size: 13px; line-height: 1.9; overflow-wrap: anywhere; white-space: pre-wrap; }
+.detail-description { margin-bottom: 24px; }
+.contact-box { padding: 0 14px 12px; border: 1px solid var(--line); background: #f8fafc; border-radius: 10px; margin-top: 12px; }

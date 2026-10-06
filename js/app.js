@@ -14,6 +14,7 @@
   }
   const icons = { '证件': '🪪', '电子用品': '🎧', '生活用品': '☂️', '书籍文具': '📚', '其他': '📦' };
   let homeFilter = 'all';
+  let detailFrom = 'home';
 
   function element(tag, className, text) {
     const node = document.createElement(tag);
@@ -21,8 +22,16 @@
     if (text !== undefined) node.textContent = text;
     return node;
   }
-  function createCard(item) {
-    const card = element('article', 'item-card');
+  function createCard(item, from) {
+    const card = element('a', 'item-card');
+    card.href = '#detail-' + encodeURIComponent(item.id);
+    card.setAttribute('aria-label', '查看' + item.title + '的详情，' + core.statusLabel(item));
+    card.addEventListener('click', function (event) {
+      event.preventDefault();
+      detailFrom = from || 'home';
+      detailPage.render(item.id);
+      navigate('detail');
+    });
     const info = element('div', 'item-info');
     const badges = element('div', 'badges');
     badges.append(element('span', 'badge ' + item.type, item.type === 'lost' ? '寻物' : '招领'));
@@ -44,18 +53,22 @@
     else visible.forEach(function (item) { list.append(createCard(item)); });
   }
   function navigate(page) {
-    if (!['home', 'search', 'publish', 'mine'].includes(page)) return;
+    if (!['home', 'search', 'publish', 'mine', 'detail'].includes(page)) return;
     document.querySelectorAll('.page').forEach(function (section) { section.hidden = section.id !== page + '-page'; });
     document.querySelectorAll('.nav-item').forEach(function (button) {
-      const active = button.dataset.page === page;
+      const active = button.dataset.page === (page === 'detail' ? detailFrom : page);
       button.classList.toggle('active', active);
       if (active) button.setAttribute('aria-current', 'page');
       else button.removeAttribute('aria-current');
     });
     document.getElementById('feedback').hidden = true;
     if (page === 'home') renderHome();
+    if (page === 'search') searchPage.render();
     document.getElementById('main-content').focus({ preventScroll: true });
   }
+  const searchPage = window.LostFoundSearch.create({ core, getItems: () => items, createCard, element });
+  const detailPage = window.LostFoundDetail.create({ core, getItems: () => items, icons, element });
+  document.getElementById('detail-back').addEventListener('click', function () { navigate(detailFrom); });
   document.querySelectorAll('[data-page]').forEach(function (button) {
     button.addEventListener('click', function () { navigate(button.dataset.page); });
   });

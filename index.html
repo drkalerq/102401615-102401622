@@ -8,6 +8,8 @@
   <script defer src="js/core.js"></script>
   <script defer src="js/data.js"></script>
   <script defer src="js/storage.js"></script>
+  <script defer src="js/pages/search.js"></script>
+  <script defer src="js/pages/detail.js"></script>
   <script defer src="js/app.js"></script>
 </head>
 <body>
@@ -32,7 +34,18 @@
         <p class="demo-note">初始 5 条为虚构演示信息；新增信息保存在当前浏览器。</p>
       </section>
       <section id="search-page" class="page" aria-labelledby="search-title" hidden>
-        <h2 id="search-title">搜索物品</h2><div class="placeholder"><span aria-hidden="true">⌕</span><h3>搜索页面已就位</h3><p>下一阶段接入关键词与分类搜索。</p><button type="button" class="primary-button" data-page="home">返回首页</button></div>
+        <h2 id="search-title">搜索物品</h2>
+        <p class="form-intro">按物品名称、地点或描述查找线索。</p>
+        <form id="search-form" class="search-form" role="search">
+          <div class="field"><label for="search-keyword">关键词</label><div class="search-input-row"><input id="search-keyword" name="keyword" type="search" maxlength="100" placeholder="如：黑色 雨伞"><button type="submit" class="primary-button">搜索</button></div><p class="field-hint">多个关键词用空格分隔，结果需同时包含这些词。</p></div>
+          <div class="search-options">
+            <div class="field"><label for="search-type">信息类型</label><select id="search-type"><option value="all">全部</option><option value="lost">寻物</option><option value="found">招领</option></select></div>
+            <div class="field"><label for="search-category">物品类别</label><select id="search-category"><option value="all">全部类别</option><option>证件</option><option>电子用品</option><option>生活用品</option><option>书籍文具</option><option>其他</option></select></div>
+          </div>
+          <div class="search-footer"><label class="checkbox-label"><input id="search-active" type="checkbox">仅看未完成</label><button type="button" id="search-reset" class="text-button">清空筛选</button></div>
+        </form>
+        <div class="section-heading"><h3 class="results-heading">搜索结果</h3><span id="search-count" aria-live="polite"></span></div>
+        <div id="search-list" class="item-list"></div>
       </section>
       <section id="publish-page" class="page" aria-labelledby="publish-title" hidden>
         <h2 id="publish-title">发布信息</h2>
@@ -54,6 +67,11 @@
       </section>
       <section id="mine-page" class="page" aria-labelledby="mine-title" hidden>
         <h2 id="mine-title">我的发布</h2><div class="placeholder"><span aria-hidden="true">◇</span><h3>在这里管理你的信息</h3><p>后续接入编辑、删除及已找回／已归还状态。</p><button type="button" class="primary-button" data-page="home">返回首页</button></div>
+      </section>
+      <section id="detail-page" class="page" aria-labelledby="detail-title" hidden>
+        <button id="detail-back" type="button" class="back-button">← 返回列表</button>
+        <h2 id="detail-title">物品详情</h2>
+        <div id="detail-content"></div>
       </section>
     </main>
     <nav class="bottom-nav" aria-label="主要导航">
