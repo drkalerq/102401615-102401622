@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>校园失物招领</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/core.js"></script>
+  <script defer src="js/data.js"></script>
+  <script defer src="js/app.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="header">
+      <div class="brand"><span class="brand-icon" aria-hidden="true">寻</span><span>校园失物招领</span></div>
+      <h1>让失物更快<br>回到主人身边</h1>
+      <p>集中发布 · 快速查找 · 温暖归还</p>
+    </header>
+    <main id="main-content" tabindex="-1">
+      <section id="home-page" class="page" aria-labelledby="home-title">
+        <button class="search-entry" type="button" data-page="search"><span aria-hidden="true">⌕</span>搜索物品名称、地点…<span class="search-label">搜索</span></button>
+        <div class="section-heading"><h2 id="home-title">校园最新信息</h2><span id="result-count" aria-live="polite"></span></div>
+        <div class="filters" role="group" aria-label="信息类型筛选">
+          <button type="button" class="filter active" data-filter="all" aria-pressed="true">全部</button>
+          <button type="button" class="filter" data-filter="lost" aria-pressed="false">寻物</button>
+          <button type="button" class="filter" data-filter="found" aria-pressed="false">招领</button>
+        </div>
+        <div id="home-list" class="item-list"></div>
+        <p class="demo-note">当前为虚构演示信息，请勿按示例联系方式联系。</p>
+      </section>
+      <section id="search-page" class="page" aria-labelledby="search-title" hidden>
+        <h2 id="search-title">搜索物品</h2><div class="placeholder"><span aria-hidden="true">⌕</span><h3>搜索页面已就位</h3><p>下一阶段接入关键词与分类搜索。</p><button type="button" class="primary-button" data-page="home">返回首页</button></div>
+      </section>
+      <section id="publish-page" class="page" aria-labelledby="publish-title" hidden>
+        <h2 id="publish-title">发布信息</h2><div class="placeholder"><span aria-hidden="true">＋</span><h3>把线索分享给需要的人</h3><p>下一阶段接入寻物、招领表单与数据保存。</p><button type="button" class="primary-button" data-page="home">返回首页</button></div>
+      </section>
+      <section id="mine-page" class="page" aria-labelledby="mine-title" hidden>
+        <h2 id="mine-title">我的发布</h2><div class="placeholder"><span aria-hidden="true">◇</span><h3>在这里管理你的信息</h3><p>后续接入编辑、删除及已找回／已归还状态。</p><button type="button" class="primary-button" data-page="home">返回首页</button></div>
+      </section>
+    </main>
+    <nav class="bottom-nav" aria-label="主要导航">
+      <button type="button" class="nav-item active" data-page="home" aria-current="page"><span aria-hidden="true">⌂</span>首页</button>
+      <button type="button" class="nav-item" data-page="search"><span aria-hidden="true">⌕</span>搜索</button>
+      <button type="button" class="nav-item" data-page="publish"><span class="nav-plus" aria-hidden="true">＋</span>发布</button>
+      <button type="button" class="nav-item" data-page="mine"><span aria-hidden="true">◇</span>我的</button>
+    </nav>
+  </div>
+</body>
+</html>
